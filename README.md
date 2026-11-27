@@ -1,4 +1,4 @@
- <div align="center">
+<div align="center">
 
 # CityService
 
@@ -56,6 +56,21 @@ O projeto busca centralizar informações e facilitar o acesso dos cidadãos aos
 
 <img src="https://img.shields.io/badge/Dashboard-4285F4?style=for-the-badge" alt="Dashboard">
 <img src="https://img.shields.io/badge/Geolocaliza%C3%A7%C3%A3o-34A853?style=for-the-badge" alt="Geolocalização">
+<img src="https://img.shields.io/badge/Fetch%20de%20Sidebar-FF6F00?style=for-the-badge" alt="Fetch de sidebar">
+
+</div>
+
+---
+
+## Acessos do sistema
+
+<div align="center">
+
+| Login | Senha |
+|:---:|:---:|
+| administrador | Admin123! |
+| usuario | Usuario123! |
+| atendente | Atendente123! |
 
 </div>
 
