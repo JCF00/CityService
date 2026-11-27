@@ -90,7 +90,7 @@ A documentação completa do projeto está disponível para download em formato 
 | Giovanni Galanjauskas Kacevicius Lima Ferreira |
 | Vinicius Iglesias Gaspar|
 | Murilo Caires de Araújo |
-| Gabriel Santana |
+| Gabriel Souza Santana |
 | Henrique Rodrigues Silva |
 
 </div>
