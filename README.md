@@ -12,6 +12,13 @@ Um portal web desenvolvido para aproximar os cidadãos dos serviços e informaç
 <img src="https://img.shields.io/badge/GitHub-Reposit%C3%B3rio-black?style=for-the-badge&logo=github" alt="GitHub">
 <img src="https://img.shields.io/badge/Status-Em%20desenvolvimento-orange?style=for-the-badge" alt="Status">
 
+<br>
+<br>
+
+<a href="https://jcf00.github.io/CityService/CityService/">
+<img src="https://img.shields.io/badge/ACESSAR_O_SITE-CityService-2EA043?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Acessar o site">
+</a>
+
 </div>
 
 ---
@@ -21,6 +28,8 @@ Um portal web desenvolvido para aproximar os cidadãos dos serviços e informaç
 O **CityService** é um portal web criado conforme as orientações do professor Rafael Moura, com o objetivo de desenvolver uma plataforma que conecte o cidadão à cidade.
 
 O projeto busca centralizar informações e facilitar o acesso dos cidadãos aos serviços disponibilizados pela plataforma.
+
+🔗 **Acesse o projeto publicado:** [https://jcf00.github.io/CityService/CityService/](https://jcf00.github.io/CityService/CityService/)
 
 ---
 
@@ -127,5 +136,11 @@ Rafael Moura
 **CityService**
 
 *Desenvolvido com dedicação pela equipe CityService.*
+
+<br>
+
+<a href="https://jcf00.github.io/CityService/CityService/">
+<img src="https://img.shields.io/badge/ACESSAR_O_SITE-CityService-2EA043?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Acessar o site">
+</a>
 
 </div>
