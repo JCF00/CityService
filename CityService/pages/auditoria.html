@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/theme.js"></script><title>CityService - Auditoria</title><link rel="stylesheet" href="../css/tailwind.css"><link rel="stylesheet" href="../css/style.css"></head>
+<body class="min-h-screen bg-[#f5f7fa] text-[#263746]"><div class="min-h-screen flex"><div id="sidebar"></div><div class="w-full lg:ml-[250px] min-h-screen"><div id="header"></div><main class="p-5 sm:p-6 lg:p-[35px]"><div class="mb-8"><p class="text-[10px] tracking-[2px] uppercase font-bold text-[#20a883]">Segurança</p><h1 class="text-[30px] sm:text-[36px] font-bold mt-2">Auditoria</h1><p class="text-sm text-[#667783] mt-2 max-w-[760px]">Registro local das ações realizadas nas páginas administrativas de demonstração.</p></div>
+<div class="bg-white border border-[#dfe4e8] rounded-2xl p-5"><div class="flex items-center justify-between gap-3 mb-4"><h2 class="font-bold text-lg">Registros locais</h2><button id="limparAuditoria" class="px-4 py-2 rounded-xl border border-[#dfe4e8] text-sm font-semibold">Limpar registros</button></div><div id="listaAuditoria" class="space-y-3"></div></div>
+</main></div></div><div id="modal-container"></div>
+<script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script><script src="../js/components.js"></script>
+<script>
+const esc = value => String(value || "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+function registrarAcao(acao){const chave="cityservice_auditoria_demo";const dados=JSON.parse(localStorage.getItem(chave)||"[]");dados.unshift({acao,data:new Date().toLocaleString(window.CityServiceTranslate?window.CityServiceTranslate.getLocale():"pt-BR"),perfil:CityServiceAccess.roles[CityServiceAccess.getRole()].label});localStorage.setItem(chave,JSON.stringify(dados.slice(0,100)));}
+
+function renderAudit(){const a=JSON.parse(localStorage.getItem("cityservice_auditoria_demo")||"[]");document.getElementById("listaAuditoria").innerHTML=a.length?a.map(x=>`<article class="border border-[#e5eaee] rounded-xl p-4"><p class="font-semibold text-sm">${esc(x.acao)}</p><p class="text-xs text-[#667783] mt-2">${esc(x.perfil)} · ${esc(x.data)}</p></article>`).join(""):'<p class="text-sm text-[#667783] py-8 text-center">Ainda não há ações registradas.</p>';}document.getElementById("limparAuditoria").onclick=()=>{localStorage.removeItem("cityservice_auditoria_demo");renderAudit();};renderAudit();
+</script></body></html>

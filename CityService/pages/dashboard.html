@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/theme.js"></script><title>CityService - Dashboard</title><link rel="stylesheet" href="../css/tailwind.css"><link rel="stylesheet" href="../css/style.css"></head>
+<body class="min-h-screen bg-[#f5f7fa] text-[#263746]"><div class="min-h-screen flex"><div id="sidebar"></div><div class="w-full lg:ml-[250px] min-h-screen"><div id="header"></div>
+<main class="p-5 sm:p-6 lg:p-[35px]">
+  <div class="mb-8"><p class="text-[10px] tracking-[2px] uppercase font-bold text-[#20a883]">Indicadores</p><h1 class="text-[30px] sm:text-[36px] font-bold mt-2">Dashboard</h1><p class="text-sm text-[#667783] mt-2 max-w-[760px]">Acompanhe os dados reais das solicitações registradas no CityService.</p></div>
+  <section class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+    <article class="bg-white border border-[#dfe4e8] rounded-2xl p-5"><p class="text-sm text-[#667783]">Total de solicitações</p><p id="dashTotal" class="text-3xl font-bold mt-2">0</p></article>
+    <article class="bg-white border border-[#dfe4e8] rounded-2xl p-5"><p class="text-sm text-[#667783]">Em análise</p><p id="dashAnalise" class="text-3xl font-bold mt-2">0</p></article>
+    <article class="bg-white border border-[#dfe4e8] rounded-2xl p-5"><p class="text-sm text-[#667783]">Em andamento</p><p id="dashAndamento" class="text-3xl font-bold mt-2">0</p></article>
+    <article class="bg-white border border-[#dfe4e8] rounded-2xl p-5"><p class="text-sm text-[#667783]">Concluídas</p><p id="dashConcluidas" class="text-3xl font-bold mt-2">0</p></article>
+  </section>
+  <section class="grid xl:grid-cols-2 gap-5 mb-5">
+    <article class="bg-white border border-[#dfe4e8] rounded-2xl p-5 sm:p-6"><div class="mb-5"><h2 class="font-bold text-lg">Situação das solicitações</h2><p class="text-xs text-[#667783] mt-1">Distribuição percentual por status</p></div><div class="flex flex-col sm:flex-row items-center gap-7"><div id="statusDonut" class="w-48 h-48 rounded-full flex items-center justify-center shrink-0" style="background:conic-gradient(#e5a72d 0% 0%, #0879b8 0% 0%, #20a883 0% 0%, #e7edf0 0% 100%)"><div class="w-32 h-32 rounded-full bg-white flex flex-col items-center justify-center"><strong id="donutTotal" class="text-3xl">0</strong><span class="text-xs text-[#667783]">registros</span></div></div><div id="statusLegend" class="w-full space-y-3"></div></div></article>
+    <article class="bg-white border border-[#dfe4e8] rounded-2xl p-5 sm:p-6"><div class="mb-5"><h2 class="font-bold text-lg">Solicitações por categoria</h2><p class="text-xs text-[#667783] mt-1">Quantidade registrada em cada categoria</p></div><div id="categoryChart" class="space-y-4"><p class="text-sm text-[#667783]">Nenhuma solicitação cadastrada.</p></div></article>
+  </section>
+  <section class="bg-white border border-[#dfe4e8] rounded-2xl p-5 sm:p-6"><div class="flex items-center justify-between gap-3 mb-4"><div><h2 class="font-bold text-lg">Solicitações recentes</h2><p class="text-xs text-[#667783] mt-1">Últimos registros enviados</p></div><span id="dashUpdated" class="text-xs text-[#8a969e]"></span></div><div id="recentRequests" class="divide-y divide-[#edf0f2]"></div></section>
+</main></div></div><div id="modal-container"></div>
+<script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script><script src="../js/components.js"></script>
+<script>
+(function(){
+ const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ let all=[];try{all=JSON.parse(localStorage.getItem("cityservice_solicitacoes")||"[]");if(!Array.isArray(all))all=[];}catch(e){all=[];}
+ const locale=window.CityServiceTranslate?window.CityServiceTranslate.getLocale():"pt-BR";
+ const total=all.length, analise=all.filter(x=>x.status==="Em análise").length, andamento=all.filter(x=>x.status==="Em andamento").length, concluidas=all.filter(x=>x.status==="Concluída").length, outros=total-analise-andamento-concluidas;
+ document.getElementById("dashTotal").textContent=total;document.getElementById("dashAnalise").textContent=analise;document.getElementById("dashAndamento").textContent=andamento;document.getElementById("dashConcluidas").textContent=concluidas;document.getElementById("donutTotal").textContent=total;
+ const pct=n=>total?Math.round(n/total*100):0;const a=pct(analise),b=pct(andamento),c=pct(concluidas),d=pct(outros);
+ const stops=total?`#e5a72d 0% ${a}%, #0879b8 ${a}% ${a+b}%, #20a883 ${a+b}% ${a+b+c}%, #e7edf0 ${a+b+c}% 100%`:`#e7edf0 0% 100%`;
+ document.getElementById("statusDonut").style.background=`conic-gradient(${stops})`;
+ const legend=[ ["Em análise",analise,"#e5a72d"],["Em andamento",andamento,"#0879b8"],["Concluídas",concluidas,"#20a883"],["Outros",outros,"#e7edf0"] ];
+ document.getElementById("statusLegend").innerHTML=legend.map(x=>`<div class="flex items-center justify-between gap-3 text-sm"><span class="flex items-center gap-2"><i class="w-3 h-3 rounded-full" style="background:${x[2]}"></i>${x[0]}</span><strong>${x[1]} <span class="font-normal text-[#8a969e]">(${pct(x[1])}%)</span></strong></div>`).join("");
+ const cats={};all.forEach(x=>{const cat=x.categoria||"Não informada";cats[cat]=(cats[cat]||0)+1;});const entries=Object.entries(cats).sort((x,y)=>y[1]-x[1]);const max=Math.max(1,...entries.map(x=>x[1]));
+ document.getElementById("categoryChart").innerHTML=entries.length?entries.map(([name,n])=>`<div><div class="flex justify-between gap-3 text-sm mb-2"><span class="font-medium">${esc(name)}</span><strong>${n}</strong></div><div class="h-2.5 bg-[#edf1f3] rounded-full overflow-hidden"><div class="h-full bg-[#0879b8] rounded-full" style="width:${n/max*100}%"></div></div></div>`).join(""):'<p class="text-sm text-[#667783]">Nenhuma solicitação cadastrada.</p>';
+ const recent=[...all].reverse().slice(0,8);document.getElementById("recentRequests").innerHTML=recent.length?recent.map(x=>`<article class="py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"><div><p class="font-semibold text-sm">${esc(x.titulo||"Solicitação")}</p><p class="text-xs text-[#667783] mt-1">${esc(x.categoria||"Sem categoria")} · ${esc(x.data||"")}</p></div><span class="self-start text-xs font-semibold rounded-full px-3 py-1 ${x.status==="Concluída"?"bg-green-50 text-green-700":x.status==="Em andamento"?"bg-blue-50 text-blue-700":"bg-amber-50 text-amber-700"}">${esc(x.status||"Sem status")}</span></article>`).join(""):'<p class="text-sm text-[#667783] py-6">Ainda não existem solicitações para apresentar.</p>';
+ document.getElementById("dashUpdated").textContent=(window.CityServiceTranslate?window.CityServiceTranslate.t("Atualizado em"):"Atualizado em")+" "+new Date().toLocaleString(locale);
+})();
+</script></body></html>

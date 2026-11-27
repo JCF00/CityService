@@ -1,0 +1,188 @@
+<div
+  id="profileModal"
+  data-modal
+  class="hidden fixed inset-0 z-[100] bg-[#263746]/45 backdrop-blur-[2px] items-center justify-center p-4"
+>
+  <div
+    class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="profileTitle"
+  >
+
+    
+    <div class="relative bg-gradient-to-r from-[#0879b8] to-[#20a883] h-28">
+
+      
+      <button
+        id="closeProfile"
+        type="button"
+        data-modal-close="profileModal"
+        aria-label="Fechar"
+        class="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-xl bg-white/15 text-white hover:bg-white/25 transition"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    
+    <div class="px-6 pb-6">
+
+      
+      <div class="relative -mt-12 mb-4">
+        <div
+          class="w-24 h-24 rounded-2xl bg-white p-1.5 shadow-lg"
+        >
+          <div
+            class="w-full h-full rounded-xl bg-gradient-to-br from-[#0879b8] to-[#20a883] flex items-center justify-center text-white text-2xl font-bold"
+          >
+            <span data-user-initials>US</span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="mb-6">
+        <h2
+          id="profileTitle"
+          class="text-xl font-semibold text-[#263746]"
+        >
+          <span data-user-name>Usuário</span>
+        </h2>
+
+        <p class="text-sm text-[#637382] mt-1" data-profile-birth>Data de nascimento não cadastrada</p>
+      </div>
+
+      
+      <div class="space-y-3">
+
+        
+        <div
+          class="flex items-center gap-4 p-4 rounded-xl bg-[#f5f7fa] border border-[#dfe4e8]"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#0879b8]/10 text-[#0879b8] flex items-center justify-center shrink-0"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
+
+          <div class="min-w-0">
+            <p class="text-xs text-[#637382]">
+              E-mail
+            </p>
+
+            <p class="text-sm font-medium text-[#263746] truncate">
+              <span data-user-email>usuario@cityservice.local</span>
+            </p>
+          </div>
+        </div>
+
+        
+        <div
+          class="flex items-center gap-4 p-4 rounded-xl bg-[#f5f7fa] border border-[#dfe4e8]"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#20a883]/10 text-[#20a883] flex items-center justify-center shrink-0"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 12h6m-6 4h4m-7 5h12a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
+
+          <div>
+            <p class="text-xs text-[#637382]">
+              CPF
+            </p>
+
+            <p class="text-sm font-medium text-[#263746]">
+              <span data-profile-cpf>Não informado</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 p-4 rounded-xl bg-[#f5f7fa] border border-[#dfe4e8]">
+          <div class="w-10 h-10 rounded-lg bg-[#20a883]/10 text-[#20a883] flex items-center justify-center shrink-0">☎</div>
+          <div><p class="text-xs text-[#637382]">Telefone</p><p class="text-sm font-medium text-[#263746]" data-profile-phone>Não informado</p></div>
+        </div>
+
+        
+        <div
+          class="flex items-center gap-4 p-4 rounded-xl bg-[#f5f7fa] border border-[#dfe4e8]"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#0879b8]/10 text-[#0879b8] flex items-center justify-center shrink-0"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM4 21a8 8 0 0116 0"
+              />
+            </svg>
+          </div>
+
+          <div>
+            <p class="text-xs text-[#637382]">
+              Tipo de conta
+            </p>
+
+            <p class="text-sm font-medium text-[#263746]">
+              <span data-profile-kind>Usuário</span>
+            </p>
+          </div>
+
+          <span
+            class="ml-auto px-2.5 py-1 rounded-full text-xs font-medium bg-[#20a883]/10 text-[#20a883]"
+          >
+            Ativa
+          </span>
+        </div>
+
+      </div>
+
+      
+      <div
+        class="flex justify-end mt-6 pt-5 border-t border-[#dfe4e8]"
+      >
+        <button
+          id="logoutBtn"
+          type="button"
+          data-modal-trigger="logoutModal"
+          class="px-5 h-10 rounded-lg text-sm font-medium text-[#637382] hover:bg-[#f5f7fa] transition"
+        >
+          Sair
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

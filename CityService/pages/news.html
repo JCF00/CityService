@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/theme.js"></script>
+    <title>CityService - Notícias de Praia Grande</title>
+    <link rel="stylesheet" href="../css/tailwind.css">
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="min-h-screen bg-[#f5f7fa] text-[#263746]">
+    <div class="min-h-screen flex">
+      <div id="sidebar"></div>
+      <div class="w-full lg:ml-[250px] min-h-screen">
+        <div id="header"></div>
+
+        <main class="p-5 sm:p-6 lg:p-[35px]">
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-8">
+            <div>
+              <p class="text-[10px] tracking-[2.5px] uppercase font-bold text-[#20a883]">
+                Praia Grande - SP
+              </p>
+              <h1 class="text-[30px] sm:text-[36px] font-bold mt-2">Notícias da Cidade</h1>
+              <p class="text-sm text-[#667783] mt-2 max-w-[680px]">
+                Acompanhe comunicados oficiais, investimentos e novidades sobre os serviços públicos municipais.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              data-modal-trigger="newsFormModal" data-access-permission="gerenciar_noticias"
+              class="inline-flex items-center gap-2 h-[46px] px-5 rounded-xl bg-gradient-to-r from-[#087dbb] to-[#20a883] text-white text-sm font-bold shadow-[0_8px_20px_rgba(8,125,187,0.2)] hover:brightness-105 active:scale-[0.98] transition whitespace-nowrap"
+            >
+              <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              Adicionar notícia
+            </button>
+          </div>
+
+          
+          <section class="grid grid-cols-1 lg:grid-cols-[1.4fr_.8fr] gap-5">
+            <div id="noticia-destaque-container">
+              
+            </div>
+
+            <div class="space-y-4">
+              <article class="cs-card p-5">
+                <span class="text-[10px] uppercase tracking-wider font-bold text-[#0879b8]">Atendimento</span>
+                <h3 class="font-bold mt-2">Acompanhe suas solicitações</h3>
+                <p class="text-xs leading-5 text-[#667783] mt-2">Consulte o andamento das demandas registradas nos bairros de Praia Grande.</p>
+                <a href="requests.html" class="inline-flex mt-4 text-xs font-bold text-[#0879b8]">Ver solicitações →</a>
+              </article>
+              <article class="cs-card p-5">
+                <span class="text-[10px] uppercase tracking-wider font-bold text-[#20a883]">Geolocalização</span>
+                <h3 class="font-bold mt-2">Mapa de Ocorrências</h3>
+                <p class="text-xs leading-5 text-[#667783] mt-2">Explore os pontos de atendimento e serviços ativos no município.</p>
+                <a href="map.html" class="inline-flex mt-4 text-xs font-bold text-[#0879b8]">Abrir mapa →</a>
+              </article>
+              <article class="cs-card p-5">
+                <span class="text-[10px] uppercase tracking-wider font-bold text-[#0879b8]">Seleção da Prefeitura</span>
+                <h3 class="font-bold mt-2">Notícias em Destaque</h3>
+                <p class="text-xs leading-5 text-[#667783] mt-2">Veja as até 3 matérias marcadas como destaque no momento.</p>
+                <a href="noticias-destaque.html" class="inline-flex mt-4 text-xs font-bold text-[#0879b8]">Ver destaques →</a>
+              </article>
+            </div>
+          </section>
+
+          
+          <section class="mt-8">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <h2 class="text-lg font-bold">Mais notícias e avisos</h2>
+
+              <div class="relative w-full sm:w-[260px]">
+                <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9aa5ad]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                <input
+                  id="buscaNoticias"
+                  type="text"
+                  placeholder="Buscar notícias…"
+                  class="w-full h-[42px] pl-10 pr-4 rounded-xl border border-[#dfe4e8] bg-white text-sm text-[#263746] placeholder:text-[#a7b1b9] focus:outline-none focus:border-[#087dbb] transition"
+                />
+              </div>
+            </div>
+
+            <div id="lista-noticias" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="modal-container"></div>
+    <script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/noticias.js"></script>
+  </body>
+</html>

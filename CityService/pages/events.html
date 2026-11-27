@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/theme.js"></script>
+
+    <title>CityService - Eventos</title>
+
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <link rel="stylesheet" href="../css/style.css" />
+
+
+    <style>
+
+        .service-description-wrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            
+            transition: grid-template-rows 0.4s ease;
+            
+        }
+
+        .service-description-wrapper.expanded {
+            grid-template-rows: 1fr;
+            
+        }
+
+        .service-description-wrapper > div {
+            overflow: hidden;
+            
+        }
+
+        .service-description {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        
+
+        .service-card {
+            position: relative;
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        
+        .service-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    transparent 60%,
+                    rgba(32, 168, 131, 0.25)
+                );
+
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            
+        }
+
+        
+
+        .service-icon {
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.08) rotate(-3deg);
+            
+        }
+
+        
+
+        .toggle-btn svg {
+            transition: transform 0.35s ease;
+        }
+
+        .toggle-btn.expanded svg {
+            transform: rotate(180deg);
+            
+        }
+
+        
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card {
+            animation: cardIn 0.5s ease backwards;
+        }
+
+        
+        .service-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .service-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .service-card:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+    </style>
+</head>
+
+
+    
+    <main class="min-h-screen flex">
+
+        
+        <div id="sidebar"></div>
+
+        
+        <div class="w-full lg:ml-[250px] min-h-screen">
+
+            
+            <div id="header"></div>
+
+            <main class="p-6 lg:p-[35px]">
+
+                
+                <div class="mb-10">
+
+                    <p class="text-[10px] uppercase text-[#20a883]">
+                        Eventos
+                    </p>
+
+                    <h1 class="text-[36px] font-bold">
+                        Área de eventos
+                    </h1>
+
+                    <p class="text-sm text-[#667783]">
+                        Eventos atualmente oferecidos pela sua cidade
+                    </p>
+
+                </div>
+
+                <section class="w-full max-w-4xl mb-6 space-y-4">
+                    <div data-access-permission="gerenciar_eventos" class="bg-white border border-[#dfe4e8] rounded-2xl p-5">
+                        <h2 class="font-bold text-lg">Gerenciar eventos</h2>
+                        <p class="text-sm text-[#667783] mt-1 mb-4">Cadastre ou remova eventos divulgados no portal.</p>
+                        <form id="formEventoDemo" class="grid md:grid-cols-2 gap-3">
+                            <input id="eventoTituloDemo" required maxlength="200" placeholder="Nome do evento" class="h-11 rounded-xl border border-[#dfe4e8] px-3 text-sm">
+                            <input id="eventoLocalDemo" maxlength="255" placeholder="Local do evento" class="h-11 rounded-xl border border-[#dfe4e8] px-3 text-sm">
+                            <input id="eventoDataDemo" type="date" required class="h-11 rounded-xl border border-[#dfe4e8] px-3 text-sm">
+                            <input id="eventoImagemDemo" type="url" placeholder="URL da imagem (opcional)" class="h-11 rounded-xl border border-[#dfe4e8] px-3 text-sm">
+                            <textarea id="eventoDescricaoDemo" required rows="3" placeholder="Descrição do evento" class="rounded-xl border border-[#dfe4e8] px-3 py-3 text-sm md:col-span-2"></textarea>
+                            <button class="rounded-xl bg-[#0879b8] px-4 py-3 text-sm font-bold text-white md:col-span-2">Adicionar evento</button>
+                        </form>
+                    </div>
+                    <div id="eventosExtrasSection" class="hidden">
+                        <h2 class="text-lg font-bold mb-3">Eventos adicionados</h2>
+                        <div id="eventosExtras" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+                    </div>
+                </section>
+
+                <div class="flex flex-col items-center gap-6 w-full">
+
+                    
+
+                    <div class="service-card bg-white border border-[#dfe4e8] rounded-2xl p-10 w-full max-w-4xl shadow-[0_12px_35px_rgba(30,50,70,0.08)]">
+
+                        <div class="flex items-start justify-between">
+
+                            <div>
+                                <p class="text-[10px] tracking-[3px] uppercase font-bold text-[#20a883]">
+                                    Serviço público
+                                </p>
+
+                                <h3 class="text-3xl font-bold text-[#263746] mt-2">
+                                    Festival de Cultura de Praia Grande
+                                </h3>
+                            </div>
+
+                        </div>
+
+                        <img src="../assets/images/feira.webp">
+
+                        <div class="service-description-wrapper mt-6">
+                            <div>
+                                <p class="service-description text-sm leading-6 text-[#667783]">
+                                    Evento cultural com apresentações musicais, atividades artísticas e atrações para moradores e visitantes. A programação está prevista para setembro, com atividades voltadas à valorização da cultura local.
+                                </p>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            onclick="toggleService(this)"
+                            class="toggle-btn mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#0879b8]"
+                        >
+                            <span>Saiba mais</span>
+                        </button>
+
+                    </div>
+
+
+                        
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+
+                            
+                            <div class="service-card bg-white border border-[#dfe4e8] rounded-2xl p-6 w-full shadow-[0_12px_35px_rgba (30,50,70,0.08)]">
+
+                                <div class="flex items-start justify-between">
+
+                                    <div>
+                                        <p class="text-[10px] tracking-[3px] uppercase font-bold text-[#20a883]">
+                                            Data do evento
+                                        </p>
+
+                                        <h3 class="text-xl font-bold text-[#263746] mt-2">
+                                            Setembro de 2026
+                                        </h3>
+                                    </div>
+
+                                </div>
+
+                                <p class="text-sm leading-6 text-[#667783] mt-4">
+                                    Programação cultural prevista para diferentes dias do mês.
+                                </p>
+
+                            </div>
+
+
+                            
+                            <div class="service-card bg-white border border-[#dfe4e8] rounded-2xl p-6 w-full shadow-[0_12px_35px_rgba(30,50,70,0.08)]">
+
+                                <div class="flex items-start justify-between">
+
+                                    <div>
+                                        <p class="text-sm leading-6 text-[#667783] mt-4">
+                                           Local: espaços culturais de Praia Grande. Consulte a programação oficial.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                </div>
+
+                <div class="flex flex-col items-center gap-6 w-full">
+
+                    
+
+                    <div class="service-card bg-white border border-[#dfe4e8] rounded-2xl p-10 w-full max-w-4xl shadow-[0_12px_35px_rgba(30,50,70,0.08)]">
+
+                        <div class="flex items-start justify-between">
+
+                            <div>
+                                <p class="text-[10px] tracking-[3px] uppercase font-bold text-[#20a883]">
+                                    Serviço público
+                                </p>
+
+                                <h3 class="text-3xl font-bold text-[#263746] mt-2">
+                                    Semana do Esporte e Lazer
+                                </h3>
+                            </div>
+
+                        </div>
+
+                        <img src="../assets/images/esporte.webp">
+
+                        <div class="service-description-wrapper mt-6">
+                            <div>
+                                <p class="service-description text-sm leading-6 text-[#667783]">
+                                    Atividades esportivas e recreativas para a população, incentivando a prática de exercícios físicos e a convivência comunitária. A programação pode incluir aulas abertas, jogos e atividades ao ar livre durante setembro.
+                                </p>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            onclick="toggleService(this)"
+                            class="toggle-btn mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#0879b8]"
+                        >
+                            <span>Saiba mais</span>
+                        </button>
+
+                    </div>
+
+
+                        
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+
+                            
+                            <div class="service-card bg-white border border-[#dfe4e8] rounded-2xl p-6 w-full shadow-[0_12px_35px_rgba (30,50,70,0.08)]">
+
+                                <div class="flex items-start justify-between">
+
+                                    <div>
+                                        <p class="text-[10px] tracking-[3px] uppercase font-bold text-[#20a883]">
+                                            Data do evento
+                                        </p>
+
+                                        <h3 class="text-xl font-bold text-[#263746] mt-2">
+                                            Setembro de 2026
+                                        </h3>
+                                    </div>
+
+                                </div>
+
+                                <p class="text-sm leading-6 text-[#667783] mt-4">
+                                    Atividades previstas ao longo do mês, conforme a programação municipal.
+                                </p>
+
+                            </div>
+
+
+                            
+                            <div class="service-card bg-white border border-[#dfe4e8] rounded-2xl p-6 w-full shadow-[0_12px_35px_rgba(30,50,70,0.08)]">
+
+                                <div class="flex items-start justify-between">
+
+                                    <div>
+                                        <p class="text-sm leading-6 text-[#667783] mt-4">
+                                            Local: espaços esportivos e áreas públicas de Praia Grande.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                </div>
+
+                <div class="flex flex-col items-center gap-6 w-full">
+
+                    
+
+                    <div class="service-card bg-white border border-[#dfe4e8] rounded-2xl p-10 w-full max-w-4xl shadow-[0_12px_35px_rgba(30,50,70,0.08)]">
+
+                        <div class="flex items-start justify-between">
+
+                            <div>
+                                <p class="text-[10px] tracking-[3px] uppercase font-bold text-[#20a883]">
+                                    Serviço público
+                                </p>
+
+                                <h3 class="text-3xl font-bold text-[#263746] mt-2">
+                                    Feira de Serviços à Comunidade
+                                </h3>
+                            </div>
+
+                        </div>
+
+                        <img src="../assets/images/servicos.png">
+
+                        <div class="service-description-wrapper mt-6">
+                            <div>
+                                <p class="service-description text-sm leading-6 text-[#667783]">
+                                    Ação voltada aos moradores de Praia Grande, reunindo orientações sobre serviços públicos, atividades educativas e informações úteis para a população. A iniciativa busca aproximar os cidadãos dos serviços oferecidos pelo município.
+                                </p>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            onclick="toggleService(this)"
+                            class="toggle-btn mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#0879b8]"
+                        >
+                            <span>Saiba mais</span>
+                        </button>
+
+                    </div>
+
+
+                        
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+
+                            
+                            <div class="service-card bg-white border border-[#dfe4e8] rounded-2xl p-6 w-full shadow-[0_12px_35px_rgba (30,50,70,0.08)]">
+
+                                <div class="flex items-start justify-between">
+
+                                    <div>
+                                        <p class="text-[10px] tracking-[3px] uppercase font-bold text-[#20a883]">
+                                          Público
+                                        </p>
+
+                                        <h3 class="text-xl font-bold text-[#263746] mt-2">
+                                            Moradores e visitantes
+                                        </h3>
+                                    </div>
+
+                                </div>
+
+                                <p class="text-sm leading-6 text-[#667783] mt-4">
+                                   Atividade destinada à comunidade, com orientações e informações sobre serviços municipais.
+                                </p>
+
+                            </div>
+
+
+                            
+                            <div class="service-card bg-white border border-[#dfe4e8] rounded-2xl p-6 w-full shadow-[0_12px_35px_rgba(30,50,70,0.08)]">
+
+                                <div class="flex items-start justify-between">
+
+                                    <div>
+                                        <p class="text-sm leading-6 text-[#667783] mt-4">
+                                            Local e horário: consulte a divulgação oficial da Prefeitura de Praia Grande.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                </div>
+
+    </main>
+
+    
+    <div id="modal-container"></div>
+
+    
+    <script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script>
+    <script src="../js/components.js"></script>
+
+    <script>
+
+        function toggleService(button) {
+
+            const card = button.closest(".service-card");
+
+            const wrapper =
+                card.querySelector(".service-description-wrapper");
+
+            const isExpanded =
+                wrapper.classList.contains("expanded");
+
+            if (isExpanded) {
+
+                wrapper.classList.remove("expanded");
+                button.classList.remove("expanded");
+
+                button.querySelector("span").textContent =
+                    "Saiba mais";
+
+            } else {
+
+                wrapper.classList.add("expanded");
+                button.classList.add("expanded");
+
+                button.querySelector("span").textContent =
+                    "Mostrar menos";
+            }
+        }
+
+</script>
+    <script src="../js/conteudo-publico.js"></script>
+
+</body>
+</html>

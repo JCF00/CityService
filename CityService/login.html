@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/theme.js"></script>
+    <title>CityService - Login</title>
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0,0"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body
+    class="min-h-screen bg-[#f3f7f8] flex items-center justify-center p-3 sm:p-6"
+  >
+    <main
+      id="mainContainer"
+      class="mode-login w-full max-w-[1235px] min-h-screen lg:min-h-[720px] bg-white rounded-xl overflow-hidden border border-gray-200 shadow-[0_12px_40px_rgba(38,55,70,0.08)] grid grid-cols-1 lg:grid-cols-2"
+    >
+      <section
+        id="infoCol"
+        class="order-2 lg:order-1 relative overflow-hidden bg-gradient-to-br from-[#f7fcfc] to-[#edfafa] px-8 py-12 sm:px-16 flex flex-col items-center"
+      >
+        <div class="relative z-10 w-full flex flex-col items-center">
+          <div class="w-full flex justify-center mt-4">
+            <img
+              src="assets/images/nobg-logo.png"
+              alt="CityService"
+              class="w-[310px] max-w-full object-contain"
+            />
+          </div>
+
+          <div class="flex items-center mt-12 mb-8">
+            <div class="w-[75px] h-[3px] bg-[#20a883]"></div>
+            <div class="w-[75px] h-[3px] bg-[#0879b8]"></div>
+          </div>
+
+          <div class="text-center mb-8">
+            <h2 class="text-xl sm:text-[21px] font-bold leading-8">
+              <span class="text-[#0879b8]">Sua cidade mais conectada,</span>
+              <br />
+              <span class="text-[#20a883]">
+                seus serviços mais acessíveis.
+              </span>
+            </h2>
+          </div>
+
+          <div class="w-full max-w-[460px] space-y-6">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-[35px] h-[35px] shrink-0 rounded-lg border border-[#20a883] flex items-center justify-center text-[#0879b8] text-lg"
+              >
+                ✓
+              </div>
+              <div>
+                <h3 class="font-bold text-sm text-[#263746]">
+                  Solicite serviços
+                </h3>
+                <p class="text-xs sm:text-sm text-[#61717d]">
+                  Registre solicitações e acompanhe seus atendimentos.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div
+                class="w-[35px] h-[35px] shrink-0 rounded-lg border border-[#20a883] flex items-center justify-center text-[#0879b8] text-lg"
+              >
+                ✥
+              </div>
+              <div>
+                <h3 class="font-bold text-sm text-[#263746]">
+                  Encontre informações
+                </h3>
+                <p class="text-xs sm:text-sm text-[#61717d]">
+                  Consulte eventos, notícias e serviços da sua cidade.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div
+                class="w-[35px] h-[35px] shrink-0 rounded-lg border border-[#20a883] flex items-center justify-center text-[#0879b8] text-lg"
+              >
+                ✓
+              </div>
+              <div>
+                <h3 class="font-bold text-sm text-[#263746]">Transparência</h3>
+                <p class="text-xs sm:text-sm text-[#61717d]">
+                  Acesse informações públicas de forma simples e segura.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="formCol"
+        class="order-1 lg:order-2 relative z-20 flex items-center justify-center px-8 py-12 sm:px-16 lg:px-20 bg-white"
+      >
+        <div class="w-full max-w-[350px]">
+          <div class="mb-8">
+            <h1
+              id="formTitle"
+              class="text-[27px] leading-[1.15] font-bold text-[#1e2c39]"
+            >
+              Bem-vindo ao Portal<br />
+              CityService!
+            </h1>
+
+            <p id="formSubtitle" class="mt-3 text-sm leading-6 text-[#687681]">
+              Entre na sua conta para acessar os serviços da cidade.
+            </p>
+          </div>
+
+          <div id="formContainer" class="form-container">
+            <form
+              id="loginForm"
+              action="pages/inicio.html"
+              method="POST"
+              class="active"
+            >
+              <div>
+                <label
+                  for="loginEmail"
+                  class="block mb-2 text-sm font-bold text-[#263746]"
+                >
+                  Usuário ou e-mail
+                </label>
+
+                <div class="relative">
+                  <span
+                    class="absolute left-4 inset-y-0 flex items-center text-[#71808b] text-sm"
+                  >
+                    @
+                  </span>
+
+                  <input
+                    type="text"
+                    id="loginEmail"
+                    name="username"
+                    placeholder="Digite seu usuário"
+                    autocomplete="username"
+                    required
+                    class="w-full h-[49px] pl-11 pr-4 rounded-lg border border-[#c8ced2] outline-none text-sm text-[#263746] placeholder:text-[#9ca5aa] focus:border-[#0784ba] focus:ring-1 focus:ring-[#0784ba] transition"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="loginPassword"
+                  class="block mb-2 text-sm font-bold text-[#263746]"
+                >
+                  Senha
+                </label>
+
+                <div class="relative">
+                  <span
+                    class="absolute left-4 inset-y-0 flex items-center pointer-events-none text-[#71808b]"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[19px] leading-none"
+                    >
+                      lock
+                    </span>
+                  </span>
+
+                  <input
+                    type="password"
+                    id="loginPassword"
+                    name="password"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                    required
+                    class="w-full h-[49px] pl-11 pr-12 rounded-lg border border-[#c8ced2] outline-none text-sm tracking-widest text-[#263746] placeholder:tracking-normal placeholder:text-[#9ca5aa] focus:border-[#0784ba] focus:ring-1 focus:ring-[#0784ba] transition"
+                  />
+
+                  <button
+                    type="button"
+                    onclick="
+                      togglePassword('loginPassword', 'loginPasswordIcon')
+                    "
+                    aria-label="Mostrar ou ocultar senha"
+                    class="absolute right-0 inset-y-0 w-[49px] flex items-center justify-center text-[#71808b] hover:text-[#0879b8] transition"
+                  >
+                    <span
+                      id="loginPasswordIcon"
+                      class="material-symbols-outlined text-[21px] leading-none"
+                    >
+                      visibility
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full h-[49px] rounded-lg bg-gradient-to-r from-[#087dbb] to-[#20a883] text-white font-bold text-sm shadow-[0_8px_20px_rgba(0,130,170,0.18)] hover:brightness-105 active:scale-[0.99] transition"
+              >
+                Entrar
+                <span class="ml-2 text-lg">→</span>
+              </button>
+
+              <p class="text-sm text-center text-[#687681] mt-5">Ainda não possui cadastro? 
+            <a href="./cadastro.html" id="createAccountLink" class="font-bold text-[#0879b8] hover:underline">Criar conta</a>
+            </p>
+            </form>
+
+            
+</div>
+</div>
+      </section>
+    </main>
+
+    <script src="js/translate.js"></script>
+    <script src="js/login.js"></script>
+  </body>
+</html>

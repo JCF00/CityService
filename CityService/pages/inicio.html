@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+<meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/theme.js"></script>
+
+    <title>CityService - Início</title>
+
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  </head>
+
+  <body class="min-h-screen bg-[#f5f7fa] text-[#263746]">
+    <div class="min-h-screen flex">
+      <div id="sidebar"></div>
+
+      <div class="w-full lg:ml-[250px] min-h-screen">
+        <div id="header"></div>
+
+        <main class="p-6 lg:p-[35px]">
+          
+
+          <section>
+            <div class="py-2">
+              <div
+                class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-8"
+              >
+                <div class="max-w-[650px]">
+                  <p
+                    class="text-[10px] tracking-[2px] uppercase font-bold text-[#20a883]"
+                  >
+                    Portal do cidadão
+                  </p>
+
+                  <h1
+                    class="text-[30px] sm:text-[34px] lg:text-[38px] leading-tight font-bold text-[#1d2d3b] mt-2"
+                  >
+                    Olá! Como podemos
+
+                    <span class="text-[#0879b8]"> ajudar? </span>
+                  </h1>
+
+                  <p
+                    class="text-sm leading-6 text-[#667783] mt-3 max-w-[590px]"
+                  >
+                    Consulte serviços, registre solicitações e acompanhe suas
+                    demandas de forma simples e rápida.
+                  </p>
+
+                  <div class="flex flex-wrap gap-3 mt-6">
+                    <button
+                      type="button"
+                      data-modal-trigger="requestModal"
+                      class="inline-flex items-center justify-center gap-2 h-[45px] px-5 rounded-lg bg-gradient-to-r from-[#087dbb] to-[#20a883] text-white text-sm font-semibold shadow-[0_6px_16px_rgba(0,130,170,0.16)] hover:brightness-105 transition"
+                    >
+                      <span class="text-base"> + </span>
+
+                      Nova solicitação
+                    </button>
+
+                    <button
+                      id="profileBtn"
+                      type="button"
+                      data-modal-trigger="profileModal"
+                      class="inline-flex items-center justify-center h-[45px] px-5 rounded-lg bg-white border border-[#cfd8dd] text-[#263746] text-sm font-semibold hover:bg-[#f7fafb] transition"
+                      aria-label="Abrir perfil"
+                    >
+                      Acessar perfil
+                    </button>
+                  </div>
+                </div>
+
+                <div class="flex gap-3 shrink-0">
+                  <div
+                    class="w-[135px] h-[97px] bg-white border border-[#d9e0e4] rounded-lg px-4 py-4 shadow-[0_4px_15px_rgba(30,50,70,0.02)]"
+                  >
+                    <p class="text-[25px] font-bold text-[#0879b8]">24h</p>
+
+                    <p class="text-[11px] text-[#637382] mt-1">
+                      Atendimento digital
+                    </p>
+                  </div>
+
+                  <div
+                    class="w-[135px] h-[97px] bg-white border border-[#d9e0e4] rounded-lg px-4 py-4 shadow-[0_4px_15px_rgba(30,50,70,0.02)]"
+                  >
+                    <p class="text-[25px] font-bold text-[#0879b8]">48h</p>
+
+                    <p class="text-[11px] text-[#637382] mt-1">
+                      Prazo de suporte
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          
+
+          <section class="mt-10">
+            <div class="mb-8">
+              <p
+                class="text-[10px] tracking-[2px] uppercase font-bold text-[#20a883]"
+              >
+                Acesso rápido
+              </p>
+
+              <h2 class="text-[25px] font-bold text-[#263746] mt-2">
+                Atalhos rápidos
+              </h2>
+
+              <p class="text-sm text-[#667783] mt-2">
+                Acesse os principais recursos do portal.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <a
+                href="requests.html"
+                class="group relative min-h-[140px] bg-white border border-[#dfe4e8] rounded-xl p-5 hover:border-[#b9dce8] hover:shadow-[0_8px_25px_rgba(30,50,70,0.05)] transition"
+              >
+                <div
+                  class="w-[43px] h-[43px] rounded-lg bg-[#edf9f6] flex items-center justify-center text-[#20a883] mb-4"
+                >
+                  <span class="text-[23px] leading-none"> + </span>
+                </div>
+
+                <h3 class="text-sm font-bold text-[#263746]">
+                  Registrar solicitação
+                </h3>
+
+                <p class="text-xs leading-5 text-[#667783] mt-1 max-w-[270px]">
+                  Informe um problema ou necessidade da sua região.
+                </p>
+
+                <span
+                  class="absolute right-5 bottom-4 text-[#89959d] group-hover:text-[#0879b8] group-hover:translate-x-1 transition"
+                >
+                  →
+                </span>
+              </a>
+
+              <a
+                href="requests.html"
+                class="group relative min-h-[140px] bg-white border border-[#dfe4e8] rounded-xl p-5 hover:border-[#b9dce8] hover:shadow-[0_8px_25px_rgba(30,50,70,0.05)] transition"
+              >
+                <div
+                  class="w-[43px] h-[43px] rounded-lg bg-[#edf6fb] flex items-center justify-center text-[#0879b8] mb-4"
+                >
+                  <span class="text-[23px] leading-none"> ✓ </span>
+                </div>
+
+                <h3 class="text-sm font-bold text-[#263746]">
+                  Acompanhar solicitações
+                </h3>
+
+                <p class="text-xs leading-5 text-[#667783] mt-1 max-w-[270px]">
+                  Consulte o andamento dos seus atendimentos.
+                </p>
+
+                <span
+                  class="absolute right-5 bottom-4 text-[#89959d] group-hover:text-[#0879b8] group-hover:translate-x-1 transition"
+                >
+                  →
+                </span>
+              </a>
+
+              <a
+                href="map.html"
+                class="group relative min-h-[140px] bg-white border border-[#dfe4e8] rounded-xl p-5 hover:border-[#b9dce8] hover:shadow-[0_8px_25px_rgba(30,50,70,0.05)] transition"
+              >
+                <div
+                  class="w-[43px] h-[43px] rounded-lg bg-[#edf9f6] flex items-center justify-center text-[#20a883] mb-4"
+                >
+                  <svg
+                    class="w-[20px] h-[20px]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  >
+                    <circle cx="12" cy="12" r="2.5" />
+
+                    <path d="M12 4v3" />
+                    <path d="M12 17v3" />
+                    <path d="M4 12h3" />
+                    <path d="M17 12h3" />
+                  </svg>
+                </div>
+
+                <h3 class="text-sm font-bold text-[#263746]">
+                  Mapa de ocorrências
+                </h3>
+
+                <p class="text-xs leading-5 text-[#667783] mt-1 max-w-[270px]">
+                  Visualize problemas registrados pela população.
+                </p>
+
+                <span
+                  class="absolute right-5 bottom-4 text-[#89959d] group-hover:text-[#0879b8] group-hover:translate-x-1 transition"
+                >
+                  →
+                </span>
+              </a>
+
+              <a
+                href="services.html"
+                class="group relative min-h-[140px] bg-white border border-[#dfe4e8] rounded-xl p-5 hover:border-[#b9dce8] hover:shadow-[0_8px_25px_rgba(30,50,70,0.05)] transition"
+              >
+                <div
+                  class="w-[43px] h-[43px] rounded-lg bg-[#edf6fb] flex items-center justify-center text-[#0879b8] mb-4"
+                >
+                  <svg
+                    class="w-[20px] h-[20px]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  >
+                    <rect x="5" y="5" width="14" height="14" />
+
+                    <rect x="9" y="9" width="6" height="6" />
+                  </svg>
+                </div>
+
+                <h3 class="text-sm font-bold text-[#263746]">
+                  Serviços públicos
+                </h3>
+
+                <p class="text-xs leading-5 text-[#667783] mt-1">
+                  Consulte os serviços oferecidos pela prefeitura.
+                </p>
+
+                <span
+                  class="absolute right-5 bottom-4 text-[#89959d] group-hover:text-[#0879b8] group-hover:translate-x-1 transition"
+                >
+                  →
+                </span>
+              </a>
+
+              <a
+                href="news.html"
+                class="group relative min-h-[140px] bg-white border border-[#dfe4e8] rounded-xl p-5 hover:border-[#b9dce8] hover:shadow-[0_8px_25px_rgba(30,50,70,0.05)] transition"
+              >
+                <div
+                  class="w-[43px] h-[43px] rounded-lg bg-[#fff7e8] flex items-center justify-center text-[#d99b26] mb-4"
+                >
+                  <span class="text-lg"> ▤ </span>
+                </div>
+
+                <h3 class="text-sm font-bold text-[#263746]">Notícias</h3>
+
+                <p class="text-xs leading-5 text-[#667783] mt-1">
+                  Acompanhe as principais notícias da cidade.
+                </p>
+
+                <span
+                  class="absolute right-5 bottom-4 text-[#89959d] group-hover:text-[#0879b8] group-hover:translate-x-1 transition"
+                >
+                  →
+                </span>
+              </a>
+
+              <a
+                href="transparencia.html"
+                class="group relative min-h-[140px] bg-white border border-[#dfe4e8] rounded-xl p-5 hover:border-[#b9dce8] hover:shadow-[0_8px_25px_rgba(30,50,70,0.05)] transition"
+              >
+                <div
+                  class="w-[43px] h-[43px] rounded-lg bg-[#edf9f6] flex items-center justify-center text-[#20a883] mb-4"
+                >
+                  <span class="text-lg"> ✓ </span>
+                </div>
+
+                <h3 class="text-sm font-bold text-[#263746]">Transparência</h3>
+
+                <p class="text-xs leading-5 text-[#667783] mt-1">
+                  Consulte informações públicas da cidade.
+                </p>
+
+                <span
+                  class="absolute right-5 bottom-4 text-[#89959d] group-hover:text-[#0879b8] group-hover:translate-x-1 transition"
+                >
+                  →
+                </span>
+              </a>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="modal-container"></div>
+
+    <script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script>
+    <script src="../js/components.js"></script>
+  </body>
+</html>

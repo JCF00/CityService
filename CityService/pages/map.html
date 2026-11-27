@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+<meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/theme.js"></script>
+
+    <title>CityService - Mapa de Ocorrências</title>
+
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body class="min-h-screen bg-[#f5f7fa] text-[#263746]">
+    <div class="min-h-screen flex">
+      <div id="sidebar"></div>
+
+      <div class="w-full lg:ml-[250px] min-h-screen">
+        <div id="header"></div>
+
+          <main class="p-6 lg:p-[35px]">
+            <div class="mb-8">
+              <p
+                class="text-[10px] tracking-[2px] uppercase font-bold text-[#20a883]"
+              >
+                Ocorrências
+              </p>
+
+              <h1 class="text-[30px] font-bold text-[#263746] mt-2">
+                Mapa de ocorrências
+              </h1>
+
+              <p class="text-sm text-[#667783] mt-2">
+                Visualize solicitações registradas pela população em diferentes
+                pontos de Praia Grande.
+              </p>
+            </div>
+
+            <div
+              class="bg-white rounded-2xl border border-[#dfe4e8] p-4 shadow-[0_5px_20px_rgba(30,50,70,0.05)]"
+            >
+              <div
+                id="mapa-ocorrencias"
+                class="w-full h-[500px] rounded-xl overflow-hidden"
+              ></div>
+            </div>
+
+            <div
+              id="lista-solicitacoes"
+              class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            ></div>
+          </main>
+
+      </div>
+    </div>
+
+    <div id="modal-container"></div>
+
+    <script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script>
+    <script src="../js/components.js"></script>
+
+
+     <script>
+  var mapa = L.map("mapa-ocorrencias").setView(
+    [-24.01785, -46.46461],
+    13
+  );
+
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      attribution: "&copy; OpenStreetMap contributors",
+    }
+  ).addTo(mapa);
+
+  var pinIcon = L.divIcon({
+    html: `
+      <div style="
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, #20A883, #087DBB);
+        border: 3px solid #F5F8F9;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+        position: relative;
+      ">
+
+        <div style="
+          position: absolute;
+          width: 9px;
+          height: 9px;
+          background: #F5F8F9;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        "></div>
+
+      </div>
+    `,
+
+    className: "",
+
+    iconSize: [36, 36],
+
+    iconAnchor: [18, 36],
+
+    popupAnchor: [0, -36],
+  });
+
+  function obterSolicitacoes() {
+    try {
+      var solicitacoes = JSON.parse(
+        localStorage.getItem("cityservice_solicitacoes")
+      );
+
+      if (Array.isArray(solicitacoes)) {
+        return window.CityServiceAccess ? window.CityServiceAccess.filterRequests(solicitacoes) : solicitacoes;
+      }
+
+      return [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function escapeHtml(texto) {
+    var div = document.createElement("div");
+
+    div.textContent = texto || "";
+
+    return div.innerHTML;
+  }
+
+  function nomeCategoria(categoria) {
+    var categorias = {
+      iluminacao: "Iluminação pública",
+      vias: "Vias e calçadas",
+      limpeza: "Limpeza urbana",
+      outros: "Outros"
+    };
+
+    return categorias[categoria] || categoria;
+  }
+
+  function criarListaSolicitacoes(solicitacoes) {
+    var lista = document.getElementById(
+      "lista-solicitacoes"
+    );
+
+    if (!lista) {
+      return;
+    }
+
+    lista.innerHTML = "";
+
+    if (solicitacoes.length === 0) {
+      lista.innerHTML = `
+        <div class="col-span-full bg-white border border-[#dfe4e8] rounded-xl p-6 text-center">
+
+          <p class="text-sm font-semibold text-[#263746]">
+            Nenhuma solicitação cadastrada
+          </p>
+
+          <p class="text-xs text-[#667783] mt-1">
+            As novas solicitações aparecerão aqui.
+          </p>
+
+        </div>
+      `;
+
+      return;
+    }
+
+    solicitacoes.forEach(function (solicitacao, index) {
+      var titulo = escapeHtml(
+        solicitacao.titulo
+      );
+
+      var descricao = escapeHtml(
+        solicitacao.descricao
+      );
+
+      var categoria = escapeHtml(
+        nomeCategoria(solicitacao.categoria)
+      );
+
+      var status = escapeHtml(
+        solicitacao.status
+      );
+
+      var data = escapeHtml(
+        solicitacao.data
+      );
+
+      var card = document.createElement("div");
+
+      card.className =
+        "bg-white border border-[#dfe4e8] rounded-xl p-4";
+
+      card.innerHTML = `
+        <div class="flex items-start justify-between gap-3">
+
+          <div class="min-w-0">
+
+            <p class="text-sm font-bold text-[#263746]">
+              ${titulo}
+            </p>
+
+            <p class="text-xs text-[#667783] mt-1">
+              ${categoria}
+            </p>
+
+          </div>
+
+          <span class="shrink-0 text-[10px] font-semibold px-2 py-1 rounded-full bg-[#edf7fc] text-[#0879b8]">
+            ${status}
+          </span>
+
+        </div>
+
+        <p class="text-xs text-[#667783] mt-3">
+          ${descricao}
+        </p>
+
+        <p class="text-[10px] text-[#9aa5ad] mt-3">
+          Registrada em ${data}
+        </p>
+      `;
+
+      card.addEventListener("click", function () {
+        if (
+          solicitacao.latitude !== undefined &&
+          solicitacao.longitude !== undefined
+        ) {
+          mapa.setView(
+            [
+              solicitacao.latitude,
+              solicitacao.longitude
+            ],
+            16
+          );
+        }
+      });
+
+      card.style.cursor = "pointer";
+
+      lista.appendChild(card);
+    });
+  }
+
+  function carregarSolicitacoes() {
+    var solicitacoes = obterSolicitacoes();
+
+    solicitacoes.forEach(function (solicitacao) {
+      if (
+        solicitacao.latitude === undefined ||
+        solicitacao.longitude === undefined
+      ) {
+        return;
+      }
+
+      var titulo = escapeHtml(
+        solicitacao.titulo
+      );
+
+      var categoria = escapeHtml(
+        nomeCategoria(solicitacao.categoria)
+      );
+
+      var descricao = escapeHtml(
+        solicitacao.descricao
+      );
+
+      var status = escapeHtml(
+        solicitacao.status
+      );
+
+      var popup = `
+        <div style="min-width: 220px;">
+
+          <strong style="
+            font-size: 15px;
+            color: #263746;
+          ">
+            ${titulo}
+          </strong>
+
+          <div style="
+            margin-top: 6px;
+            font-size: 12px;
+            color: #667783;
+          ">
+            Categoria: ${categoria}
+          </div>
+
+          <div style="
+            margin-top: 6px;
+            font-size: 13px;
+            color: #263746;
+          ">
+            ${descricao}
+          </div>
+
+          <div style="
+            margin-top: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #087DBB;
+          ">
+            Status: ${status}
+          </div>
+
+        </div>
+      `;
+
+      L.marker(
+        [
+          solicitacao.latitude,
+          solicitacao.longitude
+        ],
+        {
+          icon: pinIcon
+        }
+      )
+        .addTo(mapa)
+        .bindPopup(popup);
+    });
+
+    criarListaSolicitacoes(solicitacoes);
+  }
+
+  carregarSolicitacoes();
+</script>
+  </body>
+</html>

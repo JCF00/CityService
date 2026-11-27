@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/theme.js"></script>
+    <title>CityService - Leitura de Notícia</title>
+    <link rel="stylesheet" href="../css/tailwind.css">
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="min-h-screen bg-[#f5f7fa] text-[#263746]">
+    <div class="min-h-screen flex">
+      <div id="sidebar"></div>
+      <div class="w-full lg:ml-[250px] min-h-screen">
+        <div id="header"></div>
+
+        <main class="p-5 sm:p-6 lg:p-[35px]">
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <a href="news.html" class="inline-flex items-center gap-2 text-xs font-bold text-[#0879b8]">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              Voltar para notícias
+            </a>
+
+            <button
+              type="button"
+              data-modal-trigger="newsFormModal" data-access-permission="gerenciar_noticias"
+              class="inline-flex items-center gap-2 h-[42px] px-4 rounded-xl bg-gradient-to-r from-[#087dbb] to-[#20a883] text-white text-xs font-bold shadow-[0_8px_20px_rgba(8,125,187,0.2)] hover:brightness-105 active:scale-[0.98] transition whitespace-nowrap"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              Adicionar notícia
+            </button>
+          </div>
+
+          
+          <article id="artigo-container" class="cs-card p-6 sm:p-10">
+            
+            <p class="text-sm text-[#667783]">Carregando conteúdo da matéria...</p>
+          </article>
+
+          
+          <section id="noticias-relacionadas-container" class="mt-8">
+            
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="modal-container"></div>
+    <script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/noticias.js"></script>
+  </body>
+</html>

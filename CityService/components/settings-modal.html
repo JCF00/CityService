@@ -1,0 +1,70 @@
+<div
+  id="settingsModal"
+  data-modal
+  aria-hidden="true"
+  class="fixed inset-0 z-[999] hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+>
+  <div
+    class="w-full max-w-[520px] bg-white rounded-2xl shadow-[0_25px_70px_rgba(0,0,0,0.15)] px-6 py-6 sm:px-10 sm:py-8"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="settingsTitle"
+  >
+    <h2 id="settingsTitle" class="text-xl sm:text-2xl font-bold text-[#263746] text-center">
+      Configurações
+    </h2>
+
+    <form id="settingsForm" class="flex flex-col gap-5 mt-6 sm:mt-8">
+      <div>
+        <label for="settingsLanguage" class="block text-sm font-medium text-[#263746] mb-1">
+          Idioma
+        </label>
+        <select
+          id="settingsLanguage"
+          name="language"
+          class="w-full h-[48px] px-4 rounded-xl border border-[#dfe4e8] bg-white text-[#263746] focus:outline-none focus:border-[#087dbb] transition"
+        >
+          <option value="pt-BR">Português (Brasil)</option>
+          <option value="en">English</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+
+      <div class="cityservice-theme-setting flex items-center justify-between gap-4 rounded-xl border border-[#dfe4e8] p-4">
+        <div class="min-w-0">
+          <p class="text-sm font-semibold text-[#263746]">Tema escuro</p>
+          <p id="settingsThemeDescription" class="text-xs leading-relaxed text-[#667783] mt-1">Ative o tema escuro para reduzir o brilho da interface.</p>
+        </div>
+        <button
+          type="button"
+          id="settingsThemeToggle"
+          class="cityservice-theme-switch"
+          role="switch"
+          aria-checked="false"
+          aria-label="Ativar tema escuro"
+          aria-describedby="settingsThemeDescription"
+          data-theme-toggle
+        ></button>
+      </div>
+
+
+      <div class="flex flex-col gap-3 sm:gap-4 mt-1">
+        <button
+          type="button"
+          data-modal-close="settingsModal"
+          class="w-full h-[50px] rounded-xl border border-[#dfe4e8] bg-white text-[#637382] font-medium hover:bg-[#f5f7f9] transition"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          data-modal-confirm="settingsModal"
+          data-modal-action="saveSettings"
+          class="w-full h-[50px] rounded-xl bg-gradient-to-r from-[#087dbb] to-[#20a883] text-white font-semibold hover:brightness-105 transition shadow-[0_8px_20px_rgba(8,125,187,0.25)]"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

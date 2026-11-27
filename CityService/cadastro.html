@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/theme.js"></script>
+  <title>CityService - Cadastro</title><link rel="stylesheet" href="css/tailwind.css"><link rel="stylesheet" href="css/style.css">
+</head>
+<body class="min-h-screen bg-[#f3f7f8] flex items-center justify-center p-4">
+  <main class="w-full max-w-2xl bg-white rounded-2xl border border-[#dfe4e8] shadow-xl p-6 sm:p-9">
+    <div class="flex items-center justify-between gap-4 mb-7"><div><p class="text-[10px] uppercase tracking-[2px] font-bold text-[#20a883]">Portal do cidadão</p><h1 class="text-2xl sm:text-3xl font-bold text-[#263746] mt-2">Criar cadastro</h1><p class="text-sm text-[#667783] mt-2">Preencha seus dados para acessar os serviços do CityService.</p></div><img src="assets/images/nobg-logo.png" alt="CityService" class="w-24 sm:w-32 object-contain"></div>
+    <form id="registerForm" class="grid sm:grid-cols-2 gap-4" novalidate>
+      <div class="sm:col-span-2"><label class="block text-sm font-semibold mb-1.5" for="nome">Nome completo</label><input id="nome" name="nome" required minlength="5" maxlength="120" autocomplete="name" class="w-full h-11 rounded-lg border border-[#cfd8dd] px-3 text-sm" placeholder="Seu nome completo"></div>
+      <div><label class="block text-sm font-semibold mb-1.5" for="cpf">CPF</label><input id="cpf" name="cpf" required inputmode="numeric" maxlength="14" class="w-full h-11 rounded-lg border border-[#cfd8dd] px-3 text-sm" placeholder="000.000.000-00"></div>
+      <div><label class="block text-sm font-semibold mb-1.5" for="telefone">Telefone</label><input id="telefone" name="telefone" required inputmode="tel" maxlength="15" class="w-full h-11 rounded-lg border border-[#cfd8dd] px-3 text-sm" placeholder="(00) 00000-0000"></div>
+      <div class="sm:col-span-2"><label class="block text-sm font-semibold mb-1.5" for="email">E-mail</label><input id="email" name="email" type="email" required maxlength="150" autocomplete="email" class="w-full h-11 rounded-lg border border-[#cfd8dd] px-3 text-sm" placeholder="seuemail@exemplo.com"></div>
+      <div><label class="block text-sm font-semibold mb-1.5" for="nascimento">Data de nascimento</label><input id="nascimento" name="nascimento" type="date" required class="w-full h-11 rounded-lg border border-[#cfd8dd] px-3 text-sm"></div>
+      <div><label class="block text-sm font-semibold mb-1.5" for="senha">Senha</label><input id="senha" name="senha" type="password" required minlength="8" autocomplete="new-password" class="w-full h-11 rounded-lg border border-[#cfd8dd] px-3 text-sm" placeholder="Mínimo de 8 caracteres"></div>
+      <div class="sm:col-span-2"><label class="block text-sm font-semibold mb-1.5" for="confirmarSenha">Confirmar senha</label><input id="confirmarSenha" name="confirmarSenha" type="password" required minlength="8" autocomplete="new-password" class="w-full h-11 rounded-lg border border-[#cfd8dd] px-3 text-sm" placeholder="Digite a senha novamente"></div>
+      <p id="registerMessage" class="hidden sm:col-span-2 rounded-lg px-4 py-3 text-sm" role="alert"></p>
+      <button type="submit" class="sm:col-span-2 h-12 rounded-lg bg-gradient-to-r from-[#087dbb] to-[#20a883] text-white font-bold">Cadastrar</button>
+    </form>
+    <p class="text-sm text-center text-[#667783] mt-6">Já possui cadastro? <a href="login.html" class="font-bold text-[#0879b8] hover:underline">Voltar ao login</a></p>
+  </main>
+  <script src="js/translate.js"></script>
+  <script src="js/cadastro.js"></script>
+</body></html>

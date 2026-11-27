@@ -1,0 +1,25 @@
+CITYSERVICE
+
+Usuário
+Login: usuario
+Senha: Usuario123!
+
+Atendente
+Login: atendente
+Senha: Atendente123!
+
+Administrador
+Login: administrador
+Senha: Admin123!
+
+Também é possível entrar usando o e-mail local correspondente:
+usuario@cityservice.local, atendente@cityservice.local ou administrador@cityservice.local.
+
+Cadastro de cidadãos
+A tela cadastro.html permite criar contas de cidadão com nome, CPF, telefone, e-mail, data de nascimento e senha. O formulário valida CPF, telefone, e-mail, data de nascimento, senha e duplicidade de CPF/e-mail. Após o cadastro, o cidadão entra usando o e-mail e a senha informados. Os dados do perfil são exibidos no modal Perfil.
+
+Dashboard
+A página Dashboard apresenta indicadores calculados a partir das solicitações armazenadas no navegador: totais por status, percentuais por status, distribuição por categoria e solicitações recentes. O acesso é permitido ao Atendente e ao Administrador.
+
+Notificações
+O cidadão recebe uma notificação ao registrar uma solicitação e quando o status dessa solicitação é alterado pela Gestão de solicitações. É possível marcar uma notificação individualmente como lida ou marcar todas como lidas.

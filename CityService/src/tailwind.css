@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* Inclui as páginas, componentes HTML e scripts que montam conteúdo dinamicamente. */
+@source "../";

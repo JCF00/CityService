@@ -1,0 +1,155 @@
+<div
+  id="requestModal"
+  data-modal
+  class="fixed inset-0 z-[999] hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
+>
+  <div
+  class="w-full max-w-[520px] max-h-[calc(100vh-2rem)] overflow-y-auto bg-white rounded-2xl shadow-[0_25px_70px_rgba(0,0,0,0.15)] px-6 py-6 sm:px-10 sm:py-8"
+>
+    <h2 class="text-xl sm:text-2xl font-bold text-[#263746] text-center">
+      Nova solicitação
+    </h2>
+
+    <form id="requestForm" class="flex flex-col gap-4 mt-6 sm:mt-8">
+
+      
+      <div>
+        <label
+          for="requestTitle"
+          class="block text-sm font-medium text-[#263746] mb-1"
+        >
+          Título
+        </label>
+
+        <input
+          id="requestTitle"
+          name="title"
+          type="text"
+          required
+          placeholder="Ex.: Buraco na rua"
+          class="w-full h-[48px] px-4 rounded-xl border border-[#dfe4e8] bg-white text-[#263746] placeholder:text-[#a7b1b9] focus:outline-none focus:border-[#087dbb] transition"
+        />
+      </div>
+
+      
+      <div>
+        <label
+          for="requestCategory"
+          class="block text-sm font-medium text-[#263746] mb-1"
+        >
+          Categoria
+        </label>
+
+        <select
+          id="requestCategory"
+          name="category"
+          required
+          class="w-full h-[48px] px-4 rounded-xl border border-[#dfe4e8] bg-white text-[#263746] focus:outline-none focus:border-[#087dbb] transition"
+        >
+          <option value="" disabled selected>Selecione…</option>
+          <option value="iluminacao">Iluminação pública</option>
+          <option value="vias">Vias e calçadas</option>
+          <option value="limpeza">Limpeza urbana</option>
+          <option value="outros">Outros</option>
+        </select>
+      </div>
+
+      
+      <div>
+        <label
+          for="requestDescription"
+          class="block text-sm font-medium text-[#263746] mb-1"
+        >
+          Descrição
+        </label>
+
+        <textarea
+          id="requestDescription"
+          name="description"
+          rows="4"
+          required
+          placeholder="Descreva o problema…"
+          class="w-full px-4 py-3 rounded-xl border border-[#dfe4e8] bg-white text-[#263746] placeholder:text-[#a7b1b9] focus:outline-none focus:border-[#087dbb] transition resize-none"
+        ></textarea>
+      </div>
+
+      
+      <div>
+        <div class="flex items-center justify-between gap-3 mb-1">
+
+          <label
+            class="block text-sm font-medium text-[#263746]"
+          >
+            Local da ocorrência
+          </label>
+
+          <button
+            type="button"
+            id="usarMinhaLocalizacao"
+            class="text-xs font-semibold text-[#087dbb] hover:underline"
+          >
+            Usar minha localização
+          </button>
+
+        </div>
+
+        <p class="text-xs text-[#667783] mb-2">
+          Clique no mapa ou arraste o marcador para indicar onde ocorreu o problema.
+        </p>
+
+        <div
+          id="requestMap"
+          class="w-full h-[220px] rounded-xl overflow-hidden border border-[#dfe4e8]"
+        ></div>
+
+        <div
+          class="mt-2 px-3 py-2 rounded-lg bg-[#f5f8fa] border border-[#e6ebee]"
+        >
+          <p class="text-[11px] text-[#667783]">
+            Local selecionado:
+          </p>
+
+          <p
+            id="requestCoordinates"
+            class="text-xs font-semibold text-[#263746] mt-1"
+          >
+            Nenhum local selecionado
+          </p>
+        </div>
+
+        <input
+          type="hidden"
+          id="requestLatitude"
+        />
+
+        <input
+          type="hidden"
+          id="requestLongitude"
+        />
+      </div>
+
+      
+      <div class="flex flex-col gap-3 sm:gap-4 mt-2">
+
+        <button
+          type="button"
+          data-modal-close="requestModal"
+          class="w-full h-[52px] rounded-xl border border-[#dfe4e8] bg-white text-[#637382] font-medium hover:bg-[#f5f7f9] transition"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          data-modal-confirm="requestModal"
+          data-modal-action="submitRequest"
+          class="w-full h-[52px] rounded-xl bg-gradient-to-r from-[#087dbb] to-[#20a883] text-white font-semibold hover:brightness-105 transition shadow-[0_8px_20px_rgba(8,125,187,0.25)]"
+        >
+          Enviar solicitação
+        </button>
+
+      </div>
+
+    </form>
+  </div>
+</div>

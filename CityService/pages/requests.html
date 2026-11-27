@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+<meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/theme.js"></script>
+
+    <title>CityService - Minhas Solicitações</title>
+
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  </head>
+
+  <body class="min-h-screen bg-[#f5f7fa] text-[#263746]">
+    <div id="sidebar"></div>
+
+    <div class="min-h-screen w-full lg:pl-[250px]">
+      <div id="header"></div>
+
+      <main class="p-6 lg:p-[35px]">
+        <div
+          class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-8"
+        >
+          <div>
+            <p
+              class="text-[10px] tracking-[2px] uppercase font-bold text-[#20a883]"
+            >
+              Solicitações
+            </p>
+
+            <h1 class="text-[29px] leading-tight font-bold text-[#1d2d3b] mt-2">
+              Minhas Solicitações
+            </h1>
+
+            <p class="text-sm text-[#667783] max-w-[700px]">
+              Acompanhe suas solicitações e consulte o andamento dos serviços
+              solicitados à prefeitura.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            data-modal-trigger="requestModal" data-access-permission="criar_solicitacao"
+            class="shrink-0 inline-flex items-center justify-center gap-2 h-[46px] px-5 rounded-lg bg-[#176da4] hover:bg-[#126194] text-white text-sm font-semibold transition shadow-sm"
+          >
+            <span class="text-lg leading-none">+</span>
+
+            Nova solicitação
+          </button>
+        </div>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-[26px]"
+        >
+          <div
+            class="bg-white border border-[#dfe4e8] rounded-xl min-h-[95px] px-5 py-4 flex items-center gap-4 shadow-[0_5px_18px_rgba(30,50,70,0.03)]"
+          >
+            <div
+              class="w-[44px] h-[44px] shrink-0 rounded-lg bg-[#edf7fc] flex items-center justify-center text-[#0879b8] text-xs font-medium"
+            >
+              Total
+            </div>
+
+            <div>
+              <p class="text-xs text-[#667783]">Total</p>
+
+                <p
+                  id="contadorTotal"
+                  class="text-[21px] font-bold text-[#263746] mt-1"
+                >
+                  0
+                </p>    
+
+             </div>
+          </div>
+
+          <div
+            class="bg-white border border-[#dfe4e8] rounded-xl min-h-[95px] px-5 py-4 flex items-center gap-4 shadow-[0_5px_18px_rgba(30,50,70,0.03)]"
+          >
+            <div
+              class="w-[44px] h-[44px] shrink-0 rounded-lg bg-[#fff6e5] flex items-center justify-center text-[#e5a72d]"
+            >
+              ◷
+            </div>
+
+            <div>
+              <p class="text-xs text-[#667783]">Em análise</p>
+
+                <p
+                  id="contadorAnalise"
+                  class="text-[21px] font-bold text-[#263746] mt-1"
+                >
+                  0
+                </p>          
+
+              </div>
+          </div>
+
+          <div
+            class="bg-white border border-[#dfe4e8] rounded-xl min-h-[95px] px-5 py-4 flex items-center gap-4 shadow-[0_5px_18px_rgba(30,50,70,0.03)]"
+          >
+            <div
+              class="w-[44px] h-[44px] shrink-0 rounded-lg bg-[#edf7fc] flex items-center justify-center text-[#0879b8]"
+            >
+              ↻
+            </div>
+
+            <div>
+              <p class="text-xs text-[#667783]">Em andamento</p>
+
+              <p
+                id="contadorAndamento"
+                class="text-[21px] font-bold text-[#263746] mt-1"
+              >
+                0
+              </p>           
+
+             </div>
+          </div>
+
+          <div
+            class="bg-white border border-[#dfe4e8] rounded-xl min-h-[95px] px-5 py-4 flex items-center gap-4 shadow-[0_5px_18px_rgba(30,50,70,0.03)]"
+          >
+            <div
+              class="w-[44px] h-[44px] shrink-0 rounded-lg bg-[#edf9f2] flex items-center justify-center text-[#20a16d]"
+            >
+              ✓
+            </div>
+
+            <div>
+              <p class="text-xs text-[#667783]">Concluídas</p>
+
+              <p
+                id="contadorConcluidas"
+                class="text-[21px] font-bold text-[#263746] mt-1"
+              >
+                0
+              </p>           
+              
+             </div>
+          </div>
+        </div>
+
+        <div
+          class="w-full bg-white border border-[#dfe4e8] rounded-xl p-5 shadow-[0_5px_18px_rgba(30,50,70,0.03)]"
+        >
+          <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
+            <div class="relative flex-1 min-w-0 max-w-[420px]">
+              <input
+                id="filtroSolicitacoesTexto"
+                type="search"
+                placeholder="Pesquisar por protocolo ou serviço..."
+                class="w-full h-[42px] pl-4 pr-4 rounded-lg border border-[#d5dce1] outline-none text-sm text-[#263746] placeholder:text-[#9aa5ad] focus:border-[#0879b8] focus:ring-1 focus:ring-[#0879b8] transition"
+              />
+            </div>
+
+            <div class="sm:ml-auto w-full sm:w-auto">
+              <select
+                id="filtroSolicitacoesStatus"
+                class="w-full sm:w-[160px] h-[42px] px-3 rounded-lg border border-[#d5dce1] bg-white text-sm text-[#657582] outline-none focus:border-[#0879b8] focus:ring-1 focus:ring-[#0879b8]"
+              >
+                <option value="">Todos os status</option>
+                <option value="Em análise">Em análise</option>
+                <option value="Em andamento">Em andamento</option>
+                <option value="Concluída">Concluídas</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <section class="mt-6 bg-white border border-[#dfe4e8] rounded-xl p-5 shadow-[0_5px_18px_rgba(30,50,70,0.03)]">
+          <div class="flex items-center justify-between gap-3 mb-4">
+            <h2 class="text-base font-bold text-[#263746]">Resultados</h2>
+            <span id="totalResultadosSolicitacoes" class="text-xs text-[#667783]">0 solicitações</span>
+          </div>
+          <div id="listaSolicitacoesFiltradas" class="space-y-3">
+            <p class="text-sm text-[#667783] text-center py-6">Carregando solicitações...</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="modal-container"></div>
+
+    <script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script>
+    <script src="../js/components.js"></script>
+  </body>
+</html>

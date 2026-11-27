@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/theme.js"></script>
+  <title>CityService - Transparência</title>
+  <link rel="stylesheet" href="../css/tailwind.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="min-h-screen bg-[#f5f7fa] text-[#263746]">
+  <div class="min-h-screen flex">
+    <div id="sidebar"></div>
+    <div class="w-full lg:ml-[250px] min-h-screen">
+      <div id="header"></div>
+      <main class="p-5 sm:p-6 lg:p-[35px]">
+        <div class="mb-8">
+          <p class="text-[10px] tracking-[2px] uppercase font-bold text-[#20a883]">Informações públicas</p>
+          <h1 class="text-[30px] sm:text-[36px] font-bold mt-2">Transparência</h1>
+          <p class="text-sm text-[#667783] mt-2 max-w-[760px]">Área destinada a documentos públicos, legislação municipal e informações sobre a administração da cidade.</p>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+          <article class="bg-white border border-[#dfe4e8] rounded-2xl p-5">
+            <div class="w-11 h-11 rounded-xl bg-[#edf7fc] text-[#0879b8] flex items-center justify-center mb-4"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h7"/></svg></div>
+            <h2 class="font-bold text-lg">Legislação municipal</h2>
+            <p class="text-sm text-[#667783] mt-2">Espaço para leis, decretos e normas municipais oficiais.</p>
+            <p class="text-xs text-[#9aa5ad] mt-4">Documentos oficiais pendentes de disponibilização.</p>
+          </article>
+          <article class="bg-white border border-[#dfe4e8] rounded-2xl p-5">
+            <div class="w-11 h-11 rounded-xl bg-[#edf9f2] text-[#20a883] flex items-center justify-center mb-4"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-7"/></svg></div>
+            <h2 class="font-bold text-lg">Orçamento e despesas</h2>
+            <p class="text-sm text-[#667783] mt-2">Espaço para demonstrativos de orçamento, receitas e despesas públicas.</p>
+            <p class="text-xs text-[#9aa5ad] mt-4">Dados oficiais pendentes de disponibilização.</p>
+          </article>
+          <article class="bg-white border border-[#dfe4e8] rounded-2xl p-5">
+            <div class="w-11 h-11 rounded-xl bg-[#fff6e5] text-[#b96b20] flex items-center justify-center mb-4"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+            <h2 class="font-bold text-lg">Contratos e licitações</h2>
+            <p class="text-sm text-[#667783] mt-2">Espaço para editais, contratos e informações de processos públicos.</p>
+            <p class="text-xs text-[#9aa5ad] mt-4">Documentos oficiais pendentes de disponibilização.</p>
+          </article>
+        </div>
+        <p class="mt-6 text-xs text-[#7b8992]">Esta versão é demonstrativa. Os documentos ainda não estão conectados a um sistema externo ou banco de dados.</p>
+      </main>
+    </div>
+  </div>
+  <div id="modal-container"></div>
+  <script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script>
+  <script src="../js/components.js"></script>
+</body>
+</html>

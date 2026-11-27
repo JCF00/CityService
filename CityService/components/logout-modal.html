@@ -1,0 +1,49 @@
+<div
+  id="logoutModal"
+  data-modal
+  class="fixed inset-0 z-[999] hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+>
+  <div
+    class="w-full max-w-[520px] bg-white rounded-2xl shadow-[0_25px_70px_rgba(0,0,0,0.15)] px-6 py-6 sm:px-10 sm:py-8"
+  >
+    <h2 class="text-xl sm:text-2xl font-bold text-[#263746] text-center">
+      Tem certeza de que deseja sair?
+    </h2>
+
+    <div class="flex items-center gap-4 sm:gap-5 mt-6 sm:mt-8">
+      <div
+        class="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-[#eef2f6] flex items-center justify-center text-[#263746] text-2xl sm:text-4xl font-bold shrink-0"
+      >
+        <span data-user-initials>US</span>
+      </div>
+
+      <div class="min-w-0">
+        <p data-user-name class="text-lg sm:text-xl font-semibold text-[#263746]">Usuário</p>
+        <p class="mt-1 text-sm sm:text-[15px] text-[#637382] break-all">
+          <span data-user-email>usuario@cityservice.local</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8">
+      <button
+        id="cancelLogout"
+        type="button"
+        data-modal-close="logoutModal"
+        class="w-full h-[52px] rounded-xl border border-[#dfe4e8] bg-white text-[#637382] font-medium hover:bg-[#f5f7f9] transition"
+      >
+        Cancelar
+      </button>
+
+      <button
+        id="confirmLogout"
+        type="button"
+        data-modal-confirm="logoutModal"
+        data-modal-action="logout"
+        class="w-full h-[52px] rounded-xl bg-gradient-to-r from-[#087dbb] to-[#20a883] text-white font-semibold hover:brightness-105 transition shadow-[0_8px_20px_rgba(8,125,187,0.25)]"
+      >
+        Sair
+      </button>
+    </div>
+  </div>
+</div>

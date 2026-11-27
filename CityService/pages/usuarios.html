@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/theme.js"></script><title>CityService - Usuários e permissões</title><link rel="stylesheet" href="../css/tailwind.css"><link rel="stylesheet" href="../css/style.css"></head>
+<body class="min-h-screen bg-[#f5f7fa] text-[#263746]"><div class="min-h-screen flex"><div id="sidebar"></div><div class="w-full lg:ml-[250px] min-h-screen"><div id="header"></div><main class="p-5 sm:p-6 lg:p-[35px]"><div class="mb-8"><p class="text-[10px] tracking-[2px] uppercase font-bold text-[#20a883]">Administração</p><h1 class="text-[30px] sm:text-[36px] font-bold mt-2">Usuários e permissões</h1><p class="text-sm text-[#667783] mt-2 max-w-[760px]">Consulte os níveis e as permissões configuradas para esta demonstração.</p></div>
+<div class="bg-white border border-[#dfe4e8] rounded-2xl p-5"><h2 class="font-bold text-lg mb-2">Perfis de acesso configurados</h2><p class="text-sm text-[#667783] mb-5">A estrutura SQL enviada define tabelas para níveis, permissões e vínculos, mas ainda não possui registros de permissões. A matriz atual fica em <code>js/permissoes.js</code>.</p><div id="listaPerfis" class="space-y-3"></div></div>
+</main></div></div><div id="modal-container"></div>
+<script src="../js/translate.js"></script>
+<script src="../js/permissoes.js"></script><script src="../js/components.js"></script>
+<script>
+const esc = value => String(value || "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+function registrarAcao(acao){const chave="cityservice_auditoria_demo";const dados=JSON.parse(localStorage.getItem(chave)||"[]");dados.unshift({acao,data:new Date().toLocaleString("pt-BR"),perfil:CityServiceAccess.roles[CityServiceAccess.getRole()].label});localStorage.setItem(chave,JSON.stringify(dados.slice(0,100)));}
+
+const roles=CityServiceAccess.roles;
+const lista=document.getElementById("listaPerfis");
+lista.innerHTML=Object.entries(roles).map(([id,role])=>`<article class="border border-[#e5eaee] rounded-xl p-4"><div class="flex flex-wrap items-center justify-between gap-3"><div><h3 class="font-bold">${role.label}</h3><p class="text-xs text-[#667783] mt-1">${role.pages.length} ${window.CityServiceTranslate ? window.CityServiceTranslate.t("páginas liberadas") : "páginas liberadas"}</p></div><span class="text-xs font-bold rounded-full bg-[#eef7fb] text-[#0879b8] px-3 py-1">${id}</span></div><p class="text-sm text-[#667783] mt-3">${role.permissions.includes("*")?"Todas as permissões":role.permissions.join(" · ")}</p></article>`).join("");
+</script></body></html>

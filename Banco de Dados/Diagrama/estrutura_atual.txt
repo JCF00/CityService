@@ -1,0 +1,16 @@
+CITYSERVICE — RESUMO DAS RELAÇÕES 
+
+niveis_permissao 1 --- N usuarios
+niveis_permissao N --- N permissoes (por niveis_permissoes)
+usuarios 1 --- N solicitacoes (cidadão)
+usuarios 1 --- N solicitacoes (atendente, opcional)
+categorias_solicitacao 1 --- N solicitacoes
+solicitacoes 1 --- N historico_solicitacoes
+usuarios 1 --- N historico_solicitacoes
+solicitacoes 1 --- N anexos
+usuarios 1 --- N noticias (autor)
+categorias_noticia 1 --- N noticias
+autores (usuarios) 1 --- N eventos
+usuarios 1 --- N notificacoes
+usuarios 1 --- N logs_acesso (opcional)
+
